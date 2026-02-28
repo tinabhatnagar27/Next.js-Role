@@ -1,0 +1,24 @@
+---
+# tasks file for roles/aws_nextjs
+
+- name: Load OS specific vars
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Create application user
+  user:
+    name: "{{ app_user }}"
+    shell: /bin/bash
+    create_home: yes
+    system: yes
+
+- name: Install Node
+  include_tasks: install_node.yml
+
+- name: Install PM2
+  include_tasks: install_pm2.yml
+
+- name: Setup Next.js
+  include_tasks: setup_next.yml
+
+- name: Configure Services
+  include_tasks: service.yml
