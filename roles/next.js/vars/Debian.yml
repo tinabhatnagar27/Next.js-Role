@@ -1,0 +1,4 @@
+node_dependencies:
+  - curl
+  - git
+  - build-essential
