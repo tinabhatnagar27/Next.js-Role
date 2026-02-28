@@ -1,0 +1,58 @@
+- name: Create Next.js directory
+  file:
+    path: "{{ nextjs_path }}"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: 0755
+
+- name: Create package.json
+  copy:
+    dest: "{{ nextjs_path }}/package.json"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: 0644
+    content: |
+      {
+        "name": "nextjs-app",
+        "private": true,
+        "scripts": {
+          "dev": "next dev",
+          "build": "next build",
+          "start": "next start"
+        },
+        "dependencies": {
+          "next": "latest",
+          "react": "latest",
+          "react-dom": "latest"
+        }
+      }
+
+- name: Install dependencies
+  command: sudo -u {{ app_user }} npm install
+  args:
+    chdir: "{{ nextjs_path }}"
+
+- name: Create pages directory
+  file:
+    path: "{{ nextjs_path }}/pages"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: 0755
+
+- name: Create index.js page
+  copy:
+    dest: "{{ nextjs_path }}/pages/index.js"
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: 0644
+    content: |
+      export default function Home() {
+        return <h1>Next.js is running 🚀</h1>
+      }
+
+- name: Build Next.js
+  command: sudo -u {{ app_user }} npm run build
+  args:
+    chdir: "{{ nextjs_path }}"
