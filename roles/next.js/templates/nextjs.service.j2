@@ -1,0 +1,13 @@
+[Unit]
+Description=Next.js App
+After=network.target
+
+[Service]
+Type=simple
+User={{ app_user }}
+WorkingDirectory={{ nextjs_path }}
+ExecStart=/usr/bin/npm start
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
