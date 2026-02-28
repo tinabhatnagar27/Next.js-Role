@@ -1,0 +1,14 @@
+- name: Copy NextJS service
+  template:
+    src: nextjs.service.j2
+    dest: /etc/systemd/system/nextjs.service
+
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+
+- name: Enable and start NextJS
+  systemd:
+    name: nextjs
+    enabled: yes
+    state: started
