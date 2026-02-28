@@ -1,7 +1,0 @@
----
-# defaults file for roles/aws_nextjs
-
-node_version: "18"
-app_user: "nodeapp"
-nextjs_path: "/var/www/nextjs"
-strapi_path: "/var/www/strapi"
