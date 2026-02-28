@@ -1,0 +1,19 @@
+- name: Install dependencies
+  package:
+    name: "{{ node_dependencies }}"
+    state: present
+
+- name: Add NodeSource repo
+  shell: |
+    curl -fsSL https://rpm.nodesource.com/setup_{{ node_version }}.x | bash -
+  when: ansible_os_family == "RedHat"
+
+- name: Add NodeSource repo Ubuntu
+  shell: |
+    curl -fsSL https://deb.nodesource.com/setup_{{ node_version }}.x | bash -
+  when: ansible_os_family == "Debian"
+
+- name: Install NodeJS
+  package:
+    name: nodejs
+    state: present
