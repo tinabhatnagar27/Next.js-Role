@@ -1,0 +1,7 @@
+---
+- name: Deploy Next.js
+  hosts: web
+  become: yes
+
+  roles:
+    - aws_nextjs
