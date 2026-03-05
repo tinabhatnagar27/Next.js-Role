@@ -1,0 +1,13 @@
+module.exports = ({ env }) => ({
+  connection: {
+    client: 'postgres',
+    connection: {
+      host: '{{ db_host }}',
+      port: {{ db_port }},
+      database: '{{ db_name }}',
+      user: '{{ db_user }}',
+      password: '{{ db_password }}',
+      ssl: false
+    }
+  }
+});
