@@ -1,7 +1,8 @@
 ---
-- name: Deploy Next.js
+- name: Deploy Next.js + Strapi with PM2
   hosts: web
   become: yes
 
   roles:
     - aws_nextjs
+    - aws_strapi
