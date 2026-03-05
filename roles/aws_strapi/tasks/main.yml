@@ -1,0 +1,4 @@
+---
+# tasks file for aws_strapi
+- import_tasks: node.yml
+- import_tasks: strapi.yml
