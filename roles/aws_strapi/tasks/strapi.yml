@@ -15,6 +15,15 @@
     group: nodeapp
     mode: '0755'
 
+- name: Ensure Strapi public uploads directory exists
+  file:
+    path: /home/nodeapp/my-strapi-project/public/uploads
+    state: directory
+    owner: nodeapp
+    group: nodeapp
+    mode: '0755'
+    recurse: yes
+
 - name: Create package.json for Strapi
   copy:
     dest: /home/nodeapp/my-strapi-project/package.json
