@@ -66,10 +66,36 @@
   args:
     chdir: /home/nodeapp/my-strapi-project
 
-- name: Configure Strapi database (RDS PostgreSQL)
+- name: Fix project permissions
+  file:
+    path: /home/nodeapp/my-strapi-project
+    owner: nodeapp
+    group: nodeapp
+    recurse: yes
+
+- name: Configure Strapi database
   template:
     src: database.js.j2
     dest: /home/nodeapp/my-strapi-project/config/database.js
+    owner: nodeapp
+    group: nodeapp
+    mode: '0644'
+
+- name: Configure Strapi admin
+  template:
+    src: admin.js.j2
+    dest: /home/nodeapp/my-strapi-project/config/admin.js
+    owner: nodeapp
+    group: nodeapp
+    mode: '0644'
+
+- name: Configure Strapi server
+  template:
+    src: server.js.j2
+    dest: /home/nodeapp/my-strapi-project/config/server.js
+    owner: nodeapp
+    group: nodeapp
+    mode: '0644'
 
 - name: Build Strapi
   command: npm run build
