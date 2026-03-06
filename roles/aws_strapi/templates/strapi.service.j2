@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-User=ubuntu
-WorkingDirectory={{ project_path }}
+User=nodeapp
+WorkingDirectory=/home/nodeapp/my-strapi-project
 ExecStart=/usr/bin/npm run start
 Restart=always
 Environment=NODE_ENV=production
