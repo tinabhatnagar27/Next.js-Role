@@ -1,19 +1,20 @@
+---
 - name: Install dependencies
-  package:
-    name: "{{ node_dependencies }}"
+  dnf:
+    name: curl
     state: present
+
+- name: Remove old NodeJS
+  dnf:
+    name: nodejs
+    state: absent
+  ignore_errors: yes
 
 - name: Add NodeSource repo
   shell: |
-    curl -fsSL https://rpm.nodesource.com/setup_{{ node_version }}.x | bash -
-  when: ansible_os_family == "RedHat"
-
-- name: Add NodeSource repo Ubuntu
-  shell: |
-    curl -fsSL https://deb.nodesource.com/setup_{{ node_version }}.x | bash -
-  when: ansible_os_family == "Debian"
+    curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
 
 - name: Install NodeJS
-  package:
+  dnf:
     name: nodejs
     state: present
