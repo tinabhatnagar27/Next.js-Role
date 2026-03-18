@@ -1,0 +1,6 @@
+---
+- name: Install PNPM globally
+  npm:
+    name: pnpm
+    global: yes
+
