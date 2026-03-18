@@ -1,4 +1,5 @@
-- name: Copy NextJS service
+---
+- name: Copy NextJS systemd service
   template:
     src: nextjs.service.j2
     dest: /etc/systemd/system/nextjs.service
@@ -11,4 +12,5 @@
   systemd:
     name: nextjs
     enabled: yes
-    state: started
+    state: restarted
+
