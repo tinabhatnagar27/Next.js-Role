@@ -1,0 +1,32 @@
+---
+- name: Create application directory
+  file:
+    path: "{{ nextjs_path }}"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+    mode: 0755
+
+- name: Download latest artifact from S3
+  shell: |
+    aws s3 cp s3://{{ s3_bucket }}/{{ s3_app_path }}/latest/{{ artifact_name }} /tmp/{{ artifact_name }}
+
+- name: Remove old deployment
+  file:
+    path: "{{ nextjs_path }}"
+    state: absent
+
+- name: Recreate app directory
+  file:
+    path: "{{ nextjs_path }}"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
+
+- name: Extract artifact
+  unarchive:
+    src: /tmp/nova-frontend.zip
+    dest: "{{ nextjs_path }}"
+    remote_src: yes
+    owner: "{{ app_user }}"
+    group: "{{ app_user }}"
