@@ -1,10 +1,9 @@
 ---
 - name: Install dependencies
-  dnf:
-    name: curl
-    state: present
+  shell: |
+    dnf install -y {{ node_dependencies | join(' ') }}
 
-- name: Remove old NodeJS
+- name: Remove old NodeJS if present
   dnf:
     name: nodejs
     state: absent
@@ -12,7 +11,7 @@
 
 - name: Add NodeSource repo
   shell: |
-    curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
+    curl -fsSL https://rpm.nodesource.com/setup_{{ node_version }}.x | bash -
 
 - name: Install NodeJS
   dnf:
