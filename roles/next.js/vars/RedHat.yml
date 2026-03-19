@@ -1,5 +1,4 @@
 node_dependencies:
-  - curl
   - git
   - gcc-c++
   - make
