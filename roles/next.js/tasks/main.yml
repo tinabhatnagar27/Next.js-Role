@@ -1,5 +1,3 @@
-# tasks file for aws_nextjs
-
 ---
 - name: Load OS specific vars
   include_vars: "{{ ansible_os_family }}.yml"
